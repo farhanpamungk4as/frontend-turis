@@ -8,7 +8,7 @@ export const getAuthUser = async () => {
   return cookieStore.get("user")?.value || null;
 };
 
-export const loginUser = async (nama: string, umur: any) => {
+export const loginUser = async (nama: string, umur: number) => {
   try {
     console.log("Mengirim data login:", { nama, umur }); // Debugging
 
@@ -22,18 +22,11 @@ export const loginUser = async (nama: string, umur: any) => {
       return true;
     }
   } catch (error) {
-    console.error("Login gagal:", error);
+    console.error("Login gagal:", error); // Gunakan error untuk menghindari warning
   }
   return false;
 };
 
-
-export const logoutUser = async () => {
-  const cookieStore = await cookies();
-  await cookieStore.delete("user");
-};
-
-// ➜ Fungsi untuk registrasi pengguna baru
 export const registerUser = async (userData: {
   nama: string;
   umur: number;
@@ -48,7 +41,17 @@ export const registerUser = async (userData: {
 
     return response.data;
   } catch (error) {
-    console.error("Gagal mendaftar:");
+    console.error("Gagal mendaftar:", error); // Gunakan error untuk menghindari warning
     return null;
   }
 };
+
+
+
+
+export const logoutUser = async () => {
+  const cookieStore = await cookies();
+  await cookieStore.delete("user");
+};
+
+

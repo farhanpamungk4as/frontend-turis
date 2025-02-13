@@ -2,16 +2,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginUser } from "@/lib/auth";
 
 export default function Login() {
-  const [nama, setEmail] = useState("");
+  const [nama, setNama] = useState("");
   const [umur, setUmur] = useState<number | "">(""); // Mulai dari string kosong, lalu jadi number
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = await loginUser(nama, umur);
+  
 
     router.push("/dashboard");
   
@@ -21,7 +20,7 @@ export default function Login() {
     <div className="flex min-h-screen justify-center items-center bg-gray-100">
       <form className="bg-white p-6 rounded shadow-md w-80" onSubmit={handleLogin}>
         <h2 className="text-xl font-bold mb-4">Login</h2>
-        <input type="nama" className="w-full p-2 border rounded mb-3" placeholder="nama" onChange={(e) => setEmail(e.target.value)} />
+        <input value={nama} type="nama" className="w-full p-2 border rounded mb-3" placeholder="nama" onChange={(e) => setNama(e.target.value)} />
         <input
   type="number"
   className="w-full p-2 border rounded mb-3"
